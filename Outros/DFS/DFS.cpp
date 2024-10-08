@@ -4,9 +4,9 @@ using namespace std;
 
 void dfs(vector<vector<int>> grafo, vector<int> &pre, int vertice_inicial, vector<int> &pai, int &cont)
 {
-    cout << vertice_inicial << endl;
+    //cout << vertice_inicial << endl;
 
-    pre[vertice_inicial] = cont++;
+    pre[vertice_inicial] = ++cont;
 
     for (auto u : grafo[vertice_inicial])
     {
@@ -20,7 +20,7 @@ void dfs(vector<vector<int>> grafo, vector<int> &pre, int vertice_inicial, vecto
 
 void print_grafo(vector<vector<int>> grafo)
 {
-    for(int i = 0; i < grafo.size(); i++)
+    for(int i = 1; i < grafo.size(); i++)
     {
         cout << i << ": ";
         for(auto print: grafo[i])//isso é basicamente um for in
@@ -44,7 +44,7 @@ int main()
 
     vector<int> pai(n + 1, -1);
 
-    for(int i = 0; i < m; i++)
+    for(int i = 1; i <= m; i++)
     {
         int u, v;
         cin >> u >> v;
@@ -52,7 +52,7 @@ int main()
         grafo[u].push_back(v);
     }
 
-    print_grafo(grafo);
+    //print_grafo(grafo);
 
     dfs(grafo, pre, 1, pai, cont);
 
