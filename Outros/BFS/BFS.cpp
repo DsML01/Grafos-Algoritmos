@@ -20,7 +20,7 @@ void bfs(vector<vector<int>> grafo, vector<int> &pai, int vertice_inicial, vecto
         //pega o primeiro elemento sem tirar da fila
         int w = fila.front();
 
-        pre[w] = cont++;
+        pre[w] = ++cont;
 
         fila.pop();
 
@@ -84,7 +84,7 @@ int main()
     //for(int i = 1; i < n + 1 ; i++) cout << i << endl;
 
     //funcao para printar o grafo que foi lido
-    print_grafo(grafo);
+    //print_grafo(grafo);
 
     bfs(grafo, pai, 1, pre);
 
