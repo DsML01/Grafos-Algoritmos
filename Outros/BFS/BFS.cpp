@@ -47,7 +47,7 @@ void bfs(vector<vector<int>> grafo, vector<int> &pai, int vertice_inicial, vecto
 
 void print_grafo(vector<vector<int>> grafo)
 {
-    for(int i = 0; i < grafo.size(); i++)
+    for(int i = 1; i < grafo.size(); i++)
     {
         cout << i << ": ";
         for(auto print: grafo[i])//isso é basicamente um for in
@@ -81,8 +81,10 @@ int main()
         //grafo[v].push_back(u); //Com essa linha, indicaria que o grafo não é direcionado
     }
 
+    //for(int i = 1; i < n + 1 ; i++) cout << i << endl;
+
     //funcao para printar o grafo que foi lido
-    //print_grafo(grafo);
+    print_grafo(grafo);
 
     bfs(grafo, pai, 1, pre);
 
