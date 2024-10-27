@@ -104,7 +104,7 @@ int main(int argc, char **argv)
 
     for(int i = 1; i <= n; i++) if(i != vert_inicial) dist[i] = numeric_limits<int>::max();
 
-    //fin.close();
+    fin.close();
 
     if(!output_file.empty())
     {
@@ -123,6 +123,8 @@ int main(int argc, char **argv)
             
             fout << i << ":" << dist[i] << endl;
         }
+
+        fout.close();
     }
     else
     {
