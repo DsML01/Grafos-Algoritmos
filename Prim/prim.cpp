@@ -185,12 +185,16 @@ int main(int argc, char **argv)
                     fout << "(" << i << "," << -j << ") ";
                 }
             }
-            fout << endl;            
+            fout << endl;    
+
+            fout.close();        
         }
         else
         {
             for(int i = 1; i <= n; i++) fout << "(" << "," << agm[i] << ") ";
             fout << endl;
+
+            fout.close();
         }
     }
 
