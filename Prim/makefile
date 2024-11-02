@@ -1,7 +1,7 @@
 all:
 	g++ -o prim.bin prim.cpp
 	mv prim.bin ../Bat1
-	cd ../Bat1 && ./Bat1.sh
+	cd ../Bat1 && ./Bat1.sh && rm prim.bin
 
 ignore:
 	g++ -o prim.bin ignore.cpp

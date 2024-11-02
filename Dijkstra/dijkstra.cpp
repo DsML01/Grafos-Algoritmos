@@ -3,19 +3,21 @@ using namespace std;
 
 void dijkstra(vector<vector<int>> &grafo, vector<int> &dist, vector<int> &pre, vector<vector<int>> &pesos)
 {
+    //indica que é uma priority queue, o pair<int,int> indica que o tipo de dado guardado, o vector<pair<int,in>> mosrta aonde os dados serão guardados e o
+    //greater<pair<int,int>> indica que nós armazenaremos do menor para o maior, ou seja, os que tiverem menor número, terão maior prioridade.
     priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> fila; 
 
     fila.push({0, 1});
 
     while(!fila.empty())
     {
+        //vértice atual
         int u = fila.top().second;
+        //distancia do nó inicial até o nó atual
         int dist_ate_u = fila.top().first;
         fila.pop();
 
-        if(dist_ate_u > dist[u]) continue;
-
-        else
+        if(dist_ate_u <= dist[u])
         {
             for(auto adjacente : grafo[u])
             {
@@ -98,11 +100,11 @@ int main(int argc, char **argv)
         pesos[v][u] = peso;
     }
 
-    vector<int> dist(n + 1);
+    vector<int> dist(n + 1, numeric_limits<int>::max());
+    dist[vert_inicial] = 0;
     vector<int> pre(n + 1, -1);
-    dist[vert_inicial] = 0; //vertice inicial = vertice 1, caso queira mudar, mudar com a flag -i ao compilar
-
-    for(int i = 1; i <= n; i++) if(i != vert_inicial) dist[i] = numeric_limits<int>::max();
+    // dist[vert_inicial] = 0; //vertice inicial = vertice 1, caso queira mudar, mudar com a flag -i ao compilar
+    // for(int i = 1; i <= n; i++) if(i != vert_inicial) dist[i] = numeric_limits<int>::max();
 
     fin.close();
 
@@ -128,6 +130,7 @@ int main(int argc, char **argv)
     }
     else
     {
+        //Geralmente ele cai no else...
         dijkstra(grafo, dist, pre, pesos);
 
         for(int i = 1; i <= n; i++)
