@@ -36,26 +36,26 @@ int main(){
     }
     cout<<endl;
     //Kruskal 
-    int mst_weight = 0, mst_edges = 0, mst_nodes = 0;
+    int mst_weight = 0, mst_edges = 0, mst_ni = 0;
 
     sort(edgeList.begin(), edgeList.end());
 
-    while ((mst_edges < n-1) || (mst_nodes < m))
+    while ((mst_edges < n-1) || (mst_ni < m))
     {
-        int w = edgeList[mst_nodes].first;
-        int a = edgeList[mst_nodes].second.first;
-        int b = edgeList[mst_nodes].second.second;
+        int w = edgeList[mst_ni].first;
+        int a = edgeList[mst_ni].second.first;
+        int b = edgeList[mst_ni].second.second;
 
         if (find(a) != find(b))
         {
             unite(a, b);
             mst_weight += w;
-            cout << a << " " << b << " " << w << endl;
+            cout << "(" << a << "," << b << ")" << endl;
             mst_edges++;
         }
-        mst_nodes++;
+        mst_ni++;
     }
     
-    cout << "Peso total da MST: " << mst_weight << endl;
+    /* cout << "Peso total da MST: " << mst_weight << endl; */
     return 0;
 }
