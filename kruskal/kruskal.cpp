@@ -3,7 +3,7 @@
 #include <algorithm>
 using namespace std;
 
-int fathers[100];
+vector<int> fathers;
 
 int find(int x) {
     if (fathers[x] == x) {
@@ -19,16 +19,18 @@ void unite(int x, int y) {
 }
 
 int main(){
-    for (int i = 0; i < 100; i++)
-    {
-        fathers[i] = i;
-    }
-
     int n, m;
     int a, b, w;
     vector<pair<int, pair<int, int>>> edgeList;
 
     cin >> n >> m;
+
+    fathers.resize(n + 1);
+    for (int i = 0; i < n; i++)
+    {
+        fathers[i] = i;
+    }
+
     for (int i = 0; i < m; i++)
     {
         cin >> a >> b >> w;
@@ -50,7 +52,8 @@ int main(){
         {
             unite(a, b);
             mst_weight += w;
-            cout << "(" << a << "," << b << ")" << endl;
+            cout << "(" << a << "," << b << ") ";
+
             mst_edges++;
         }
         mst_ni++;
