@@ -46,15 +46,14 @@ void clique(vector<int> V, int size, vector<vector<int>> graph) {
             }
         }
 
-        /* current_best_clique.push_back(v); */
         clique(new_V, size + 1, graph);
-        /* current_best_clique.pop_back(); */
     }
 }
 
 void print_graph(vector<vector<int>> &graph) {
-    for (int i = 0; i < graph.size(); i++) {
+    for (int i = 1; i < graph.size() ; i++) {
         /* cout << i << "-> " <<  graph[i].size(); */
+        cout << i << "-> ";
         for (int j = 0; j < graph[i].size(); j++) {
             cout << graph[i][j] << " ";
         }
@@ -66,24 +65,22 @@ int main () {
     int n, m;
     cin >> n >> m;
 
-    vector<vector<int>> graph(n);
+    vector<vector<int>> graph(n + 1);
     read_graph(graph, m);
-   /*  print_graph(graph); */
+    
 
 
     /* Defino o conjunto V de vértices */
     vector<int> V;
-    for (int i = 0; i < n; i++) {
+    for (int i = 1; i <= n; i++) {
         V.push_back(i);
     }
+    
 
     /* Ordeno do menor para o maior em relação ao grau */
     sort(V.begin(), V.end(), [&graph](int u, int v) {
         return graph[u].size() < graph[v].size();
     });
-
-    
-
 
     clique(V, 0, graph);
 }
