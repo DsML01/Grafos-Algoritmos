@@ -5,7 +5,7 @@ using namespace std;
 
 int max_size = 0;
 vector<int> current_best_clique;
-vector<int> path;
+vector<int> path, best_clique;
 
 void read_graph(vector<vector<int>> &graph, int m) {
     for (int i = 0; i < m; i++) {
@@ -20,10 +20,8 @@ void clique(vector<int> V, int size, vector<vector<int>> graph) {
     if(V.empty()){
         if(size > max_size){
             max_size = size;
-            for(int i : path){
-                cout << i << " " ;
-            }
-            cout << endl;
+           
+            best_clique = path;
             path.clear();
             return; /* verificar se o return é aqui mesmo */
         }
@@ -83,4 +81,11 @@ int main () {
     });
 
     clique(V, 0, graph);
+
+    cout << "Tamanho do clique: " << max_size << endl;
+    cout << "Clique Máxima Encontrada: ";
+    for(int i : best_clique){
+            cout << i << " " ;
+        }
+        cout << endl;
 }

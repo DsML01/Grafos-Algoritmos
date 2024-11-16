@@ -5,4 +5,8 @@ clean:
 	rm carraghan-pardalos.cpp.bin
 
 run:
-	./carraghan-pardalos.cpp.bin < inputs/input3.txt
+	./carraghan-pardalos.cpp.bin < inputs/input_1.txt
+	./carraghan-pardalos.cpp.bin < inputs/input_2.txt
+	./carraghan-pardalos.cpp.bin < inputs/input_3.txt
+	./carraghan-pardalos.cpp.bin < inputs/input_4.txt
+	./carraghan-pardalos.cpp.bin < inputs/input_5.txt
