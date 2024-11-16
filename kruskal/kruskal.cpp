@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <string.h>
+#include <fstream>
 using namespace std;
 
 vector<int> fathers;
@@ -18,12 +20,53 @@ void unite(int x, int y) {
     fathers[fx] = fy;
 }
 
-int main(){
+int main(int argc, char **argv){
+    string input_file = "";
+    string output_file = "null";
+    bool answer = false;
+    
+    for(int i = 1; i < argc; i++) 
+    {
+        if (strcmp(argv[i], "-h") == 0)
+        {
+            cout << "Help:" << endl;
+            cout << "-h: mostra o help" << endl;
+            cout << "-o <arquivo>: redireciona a saida para o arquivo" << endl;
+            cout << "-f <arquivo>: indica o 'arquivo' que contém o grafo de entrada" << endl;
+            cout << "-s: mostra a solução (em ordem crescente)" << endl;
+            cout << "-i: vértice inicial" << endl;
+            return 0;
+        } 
+        else if (strcmp(argv[i], "-o") == 0 && i < argc - 1) output_file = argv[++i];
+        
+        else if (strcmp(argv[i], "-f") == 0 && i < argc - 1) input_file = argv[++i];
+        
+        else if(strcmp(argv[i], "-s") == 0) answer = true;
+    }
+
+    if (input_file == "")
+    {
+        cerr << "Sem input especificado. Use o parametro -f" << endl;
+        return 1;
+    }
+
+
+    ifstream fin(input_file);
+    // if (fin == NULL)
+    if (!fin)
+    {
+        //cerr eh usado para printar mensagens de erro
+        cerr << "Não foi possível abrir o arquivo de input: " << input_file << endl;
+        return 1;
+    }
+
+
     int n, m;
+    fin >> n >> m;
+
     int a, b, w;
     vector<pair<int, pair<int, int>>> edgeList;
 
-    cin >> n >> m;
 
     fathers.resize(n + 1);
     for (int i = 0; i < n; i++)
@@ -33,12 +76,13 @@ int main(){
 
     for (int i = 0; i < m; i++)
     {
-        cin >> a >> b >> w;
+        fin >> a >> b >> w;
         edgeList.push_back(make_pair(w, make_pair(a, b)));
     }
-    cout<<endl;
+
     //Kruskal 
     int mst_weight = 0, mst_edges = 0, mst_ni = 0;
+    vector <pair<int, int>> agm;
 
     sort(edgeList.begin(), edgeList.end());
 
@@ -52,13 +96,33 @@ int main(){
         {
             unite(a, b);
             mst_weight += w;
-            cout << "(" << a << "," << b << ") ";
-
+            
+            agm.push_back(make_pair(a, b));
+            
             mst_edges++;
         }
         mst_ni++;
     }
     
-    /* cout << "Peso total da MST: " << mst_weight << endl; */
+    if(!output_file.empty()) {
+        ofstream fout(output_file);
+        if(!fout)
+        {
+            cerr << "Não foi possível abrir o arquivo de output: " << output_file << endl;
+            return 1;
+        }
+
+        if(!answer) {
+           fout << "Cursto da agm = " << mst_weight << endl;
+        } else {
+            for (int i = 0; i < agm.size(); i++)
+            {
+            fout << "(" << agm[i].first << "," << agm[i].second << ")";
+
+            (i < agm.size() - 1) ? fout << " " : fout << endl; 
+            }
+            
+        }
+    } 
     return 0;
 }
