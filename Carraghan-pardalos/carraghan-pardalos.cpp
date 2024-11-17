@@ -1,16 +1,18 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <string.h>
+#include <fstream>
 using namespace std;
 
 int max_size = 0;
 vector<int> current_best_clique;
 vector<int> path, best_clique;
 
-void read_graph(vector<vector<int>> &graph, int m) {
+void read_graph(ifstream &fin, vector<vector<int>> &graph, int m) {
     for (int i = 0; i < m; i++) {
         int u, v;
-        cin >> u >> v;
+        fin >> u >> v;
         graph[u].push_back(v);
         graph[v].push_back(u);
     }
@@ -23,7 +25,7 @@ void clique(vector<int> V, int size, vector<vector<int>> graph) {
            
             best_clique = path;
             path.clear();
-            return; /* verificar se o return é aqui mesmo */
+            return;
         }
     }
 
@@ -59,12 +61,48 @@ void print_graph(vector<vector<int>> &graph) {
     }
 }
 
-int main () {
+int main (int argc, char **argv) {
+    string input_file = "";
+    string output_file = "";
+    
+    for(int i = 1; i < argc; i++) 
+    {
+        if (strcmp(argv[i], "-h") == 0)
+        {
+            cout << "Help:" << endl;
+            cout << "-h: mostra o help" << endl;
+            cout << "-o <arquivo>: redireciona a saida para o arquivo" << endl;
+            cout << "-f <arquivo>: indica o 'arquivo' que contém o grafo de entrada" << endl;
+            return 0;
+        } 
+        else if (strcmp(argv[i], "-o") == 0 && i < argc - 1) output_file = argv[++i];
+        
+        else if (strcmp(argv[i], "-f") == 0 && i < argc - 1) input_file = argv[++i];
+        
+    }
+
+    if (input_file == "")
+    {
+        cerr << "Sem input especificado. Use o parametro -f" << endl;
+        return 1;
+    }
+
+
+    ifstream fin(input_file);
+
+
+    if (!fin)
+    {
+        //cerr eh usado para printar mensagens de erro
+        cerr << "Não foi possível abrir o arquivo de input: " << input_file << endl;
+        return 1;
+    }
+
     int n, m;
-    cin >> n >> m;
+    fin >> n >> m;
 
     vector<vector<int>> graph(n + 1);
-    read_graph(graph, m);
+    read_graph(fin, graph, m);
     
 
 
@@ -88,4 +126,14 @@ int main () {
             cout << i << " " ;
         }
         cout << endl;
+
+    if (output_file != "") {
+        ofstream fout(output_file);
+        fout << "Tamanho do clique: " << max_size << endl;
+        fout << "Clique Máxima Encontrada: ";
+        for(int i : best_clique){
+            fout << i << " " ;
+        }
+        fout << endl;
+    }
 }
