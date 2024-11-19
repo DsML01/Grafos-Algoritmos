@@ -129,7 +129,7 @@ int main (int argc, char **argv) {
 
     if (output_file != "") {
         ofstream fout(output_file);
-        fout << "Tamanho do clique: " << max_size << endl;
+        fout << "Tamanho da clique: " << max_size << endl;
         fout << "Clique Máxima Encontrada: ";
         for(int i : best_clique){
             fout << i << " " ;
