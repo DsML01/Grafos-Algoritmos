@@ -22,7 +22,7 @@ void unite(int x, int y) {
 
 int main(int argc, char **argv){
     string input_file = "";
-    string output_file = "null";
+    string output_file = "";
     bool answer = false;
     
     for(int i = 1; i < argc; i++) 
@@ -104,6 +104,10 @@ int main(int argc, char **argv){
         mst_ni++;
     }
     
+    if(answer) cout << "Teste" << endl;
+    else cout << mst_weight << endl;
+    //cout << mst_weight << endl;
+
     if(!output_file.empty()) {
         ofstream fout(output_file);
         if(!fout)
@@ -111,9 +115,9 @@ int main(int argc, char **argv){
             cerr << "Não foi possível abrir o arquivo de output: " << output_file << endl;
             return 1;
         }
-
+        
         if(!answer) {
-           fout << "Cursto da agm = " << mst_weight << endl;
+           fout << "Custo da agm = " << mst_weight << endl;
         } else {
             for (int i = 0; i < agm.size(); i++)
             {

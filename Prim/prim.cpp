@@ -141,6 +141,7 @@ int main(int argc, char **argv)
 
     //fin.close();
 
+    //if (ans != NULL)
     if (ans)
     {
         vector<priority_queue<int>> graph_agm = sort_agm(agm, n);
@@ -160,43 +161,44 @@ int main(int argc, char **argv)
     else cout << soma << endl;
 
 
-    if(!output_file.empty())
-    {
-        ofstream fout(output_file);
-        if(!fout)
-        {
-            cerr << "Não foi possível abrir o arquivo de output: " << output_file << endl;
-            return 1;
-        }
+    // if output_file != empty
+    // if(!output_file.empty())
+    // {
+    //     ofstream fout(output_file);
+    //     if(!fout)
+    //     {
+    //         cerr << "Não foi possível abrir o arquivo de output: " << output_file << endl;
+    //         return 1;
+    //     }
 
-        fout << "Cursto da agm = " << soma << endl;
+    //     fout << "Custo da agm = " << soma << endl;
 
-        if(ans)
-        {
-            vector<priority_queue<int>> graph_agm = sort_agm(agm, n);
+    //     if(ans)
+    //     {
+    //         vector<priority_queue<int>> graph_agm = sort_agm(agm, n);
 
-            for(int i = 0; i < graph_agm.size(); i++)
-            {
-                while(!graph_agm[i].empty())
-                {
-                    int j = graph_agm[i].top();
-                    graph_agm[i].pop();
+    //         for(int i = 0; i < graph_agm.size(); i++)
+    //         {
+    //             while(!graph_agm[i].empty())
+    //             {
+    //                 int j = graph_agm[i].top();
+    //                 graph_agm[i].pop();
 
-                    fout << "(" << i << "," << -j << ") ";
-                }
-            }
-            fout << endl;    
+    //                 fout << "(" << i << "," << -j << ") ";
+    //             }
+    //         }
+    //         fout << endl;    
 
-            fout.close();        
-        }
-        else
-        {
-            for(int i = 1; i <= n; i++) fout << "(" << "," << agm[i] << ") ";
-            fout << endl;
+    //         fout.close();        
+    //     }
+    //     else
+    //     {
+    //         for(int i = 1; i <= n; i++) fout << "(" << "," << agm[i] << ") ";
+    //         fout << endl;
 
-            fout.close();
-        }
-    }
+    //         fout.close();
+    //     }
+    // }
 
     return 0;
 }
