@@ -18,3 +18,4 @@ testelocal:
 	./kosaraju.bin -f entrada.in
 	
 testelocal2:
+	g++ -o kosaraju.bin kosaraju.cpp
