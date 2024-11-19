@@ -104,20 +104,17 @@ int main(int argc, char **argv){
         mst_ni++;
     }
     
-    if(answer) cout << "Teste" << endl;
-    else cout << mst_weight << endl;
-    //cout << mst_weight << endl;
-
-    if(!output_file.empty()) {
+    if(output_file != "") {
         ofstream fout(output_file);
         if(!fout)
         {
             cerr << "Não foi possível abrir o arquivo de output: " << output_file << endl;
             return 1;
         }
-        
+        fout << mst_weight << endl;
+
         if(!answer) {
-           fout << "Custo da agm = " << mst_weight << endl;
+           fout << mst_weight << endl;
         } else {
             for (int i = 0; i < agm.size(); i++)
             {
@@ -127,6 +124,19 @@ int main(int argc, char **argv){
             }
             
         }
-    } 
+        fout.close();
+    }  
+    else {
+        if(answer) {
+            for (int i = 0; i < agm.size(); i++)
+            {
+            cout << "(" << agm[i].first << "," << agm[i].second << ")";
+
+            (i < agm.size() - 1) ? cout << " " : cout << endl; 
+            }
+        } else {
+            cout << mst_weight << endl;
+        }
+    }
     return 0;
 }
