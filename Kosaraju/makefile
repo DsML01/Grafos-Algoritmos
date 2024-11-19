@@ -1,7 +1,7 @@
 all:
 	g++ -o kosaraju.bin kosaraju.cpp
 	mv kosaraju.bin ../Bat1
-	cd ../Bat1 && ./Bat1.sh
+	cd ../Bat1 && ./Bat1.sh && rm kosaraju.bin
 
 ignore:
 	g++ -o kosaraju.bin ignore.cpp

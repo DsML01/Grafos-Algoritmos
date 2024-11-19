@@ -1,7 +1,7 @@
 all:
 	g++ -o dijkstra.bin dijkstra.cpp
 	mv dijkstra.bin ../Bat1
-	cd ../Bat1 && ./Bat1.sh
+	cd ../Bat1 && ./Bat1.sh && rm dijkstra.bin
 
 ignore:
 	g++ -o dijkstra.bin ignore.cpp
